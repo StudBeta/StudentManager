@@ -1,0 +1,7 @@
+{
+  "/profile/page": "app/profile/page.js",
+  "/ui/buttons/page": "app/ui/buttons/page.js",
+  "/auth/signup/page": "app/auth/signup/page.js",
+  "/tables/page": "app/tables/page.js",
+  "/studentList/page": "app/studentList/page.js"
+}
