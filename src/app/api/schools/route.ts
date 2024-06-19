@@ -2,7 +2,7 @@ import dbConnect from "@/app/lib/dbConnect";
 import School from "@/app/lib/models/School";
 import { NextResponse } from "next/server";
 
-export default async function handler(req, res) {
+export default async function handler(req: any, res: any) {
   await dbConnect();
 
   const {
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       try {
         const schools = await School.find({});
         return NextResponse.json(schools);
-      } catch (err) {
+      } catch (err: any) {
         return NextResponse.json({ error: err.message });
       }
 
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
         const newSchool = new School({ name, address });
         const savedSchool = await newSchool.save();
         return NextResponse.json(savedSchool);
-      } catch (err) {
+      } catch (err: any) {
         return NextResponse.json({ error: err.message });
       }
 
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
         }
 
         return NextResponse.json(updatedSchool);
-      } catch (err) {
+      } catch (err: any) {
         return NextResponse.json({ error: err.message });
       }
 
@@ -58,7 +58,7 @@ export default async function handler(req, res) {
         return NextResponse.json({
           message: `School with ID ${id} deleted successfully`,
         });
-      } catch (err) {
+      } catch (err: any) {
         return NextResponse.json({ error: err.message });
       }
 
