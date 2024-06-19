@@ -24,7 +24,7 @@ export default async function handler(req: any, res: any) {
         const { userName, password, role } = JSON.parse(req.body);
 
         // Check if the role is valid
-        const validRoles: string[] = ["teacher", "head of school", "student", "super admin", "administrator", "receptionist"];
+        const validRoles: string[] = ["teacher", "headOfSchool", "student", "superAdmin", "administrator", "receptionist"];
         if (!validRoles.includes(role)) {
           return NextResponse.json({ error: "Invalid role" });
         }
