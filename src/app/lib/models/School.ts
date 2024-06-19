@@ -1,20 +1,35 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema, Model } from "mongoose";
 
+// Define the interface for the School document
 export interface ISchool extends Document {
-  schoolName: string;
-  description: string;
+  school_id: number;
+  name: string;
+  address: string;
+  government_regId: number;
 }
 
-const schoolSchema: Schema = new mongoose.Schema({
-  schoolName: {
+// Define the schema for the School model
+const schoolSchema: Schema = new Schema({
+  school_id: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
+  name: {
     type: String,
     required: true,
   },
-  description: {
+  address: {
     type: String,
+    required: true,
+  },
+  government_regId: {
+    type: Number,
+    required: true,
   },
 });
 
-const school = mongoose.model<ISchool>("school", schoolSchema);
+// Define and export the School model
+const School: Model<ISchool> = mongoose.models.School || mongoose.model<ISchool>("School", schoolSchema);
 
-export default school;
+export default School;
