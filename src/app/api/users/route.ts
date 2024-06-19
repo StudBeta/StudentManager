@@ -21,15 +21,9 @@ export default async function handler(req: any, res: any) {
 
     case "POST":
       try {
-        const { userName, password, role } = JSON.parse(req.body);
+        const { user_id, first_name, last_name, email, password, role_id } = JSON.parse(req.body);
 
-        // Check if the role is valid
-        const validRoles: string[] = ["teacher", "headOfSchool", "student", "superAdmin", "administrator", "receptionist"];
-        if (!validRoles.includes(role)) {
-          return NextResponse.json({ error: "Invalid role" });
-        }
-
-        const newUser = new User({ userName, password, role });
+        const newUser = new User({ user_id, first_name, last_name, email, password, role_id });
         const savedUser = await newUser.save();
         return NextResponse.json(savedUser);
       } catch (err: any) {
@@ -38,10 +32,10 @@ export default async function handler(req: any, res: any) {
 
     case "PUT":
       try {
-        const { userName, password, role } = JSON.parse(req.body);
+        const { user_id, first_name, last_name, email, password, role_id } = JSON.parse(req.body);
         const updatedUser = await User.findByIdAndUpdate(
           id,
-          { userName, password, role },
+          { user_id, first_name, last_name, email, password, role_id },
           { new: true }
         );
 

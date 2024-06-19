@@ -2,7 +2,7 @@ import dbConnect from "@/app/lib/dbConnect";
 import Student from "@/app/lib/models/Student";
 import { NextResponse } from "next/server";
 
-export default async function handler(req, res) {
+export default async function handler(req: any, res: any) {
   await dbConnect();
 
   const {
@@ -15,26 +15,27 @@ export default async function handler(req, res) {
       try {
         const students = await Student.find({});
         return NextResponse.json(students);
-      } catch (err) {
+      } catch (err: any) {
         return NextResponse.json({ error: err.message });
       }
 
     case "POST":
       try {
-        const { name, age, grade } = JSON.parse(req.body);
-        const newStudent = new Student({ name, age, grade });
+        const { student_id, user_id, class_id, enrollment_date } = JSON.parse(req.body);
+
+        const newStudent = new Student({ student_id, user_id, class_id, enrollment_date });
         const savedStudent = await newStudent.save();
         return NextResponse.json(savedStudent);
-      } catch (err) {
+      } catch (err: any) {
         return NextResponse.json({ error: err.message });
       }
 
     case "PUT":
       try {
-        const { name, age, grade } = JSON.parse(req.body);
+        const { student_id, user_id, class_id, enrollment_date } = JSON.parse(req.body);
         const updatedStudent = await Student.findByIdAndUpdate(
           id,
-          { name, age, grade },
+          { student_id, user_id, class_id, enrollment_date },
           { new: true }
         );
 
@@ -43,7 +44,7 @@ export default async function handler(req, res) {
         }
 
         return NextResponse.json(updatedStudent);
-      } catch (err) {
+      } catch (err: any) {
         return NextResponse.json({ error: err.message });
       }
 
@@ -58,7 +59,7 @@ export default async function handler(req, res) {
         return NextResponse.json({
           message: `Student with ID ${id} deleted successfully`,
         });
-      } catch (err) {
+      } catch (err: any) {
         return NextResponse.json({ error: err.message });
       }
 
