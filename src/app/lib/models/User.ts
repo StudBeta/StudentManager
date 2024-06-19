@@ -1,8 +1,10 @@
 import mongoose, { Document, Schema } from "mongoose";
 
 export interface IUser extends Document {
-  schoolName: string;
-  description: string;
+  userName: string;
+  password: string;
+  role: string;
+  createdAt: string;
 }
 
 const userSchema: Schema = new mongoose.Schema({
