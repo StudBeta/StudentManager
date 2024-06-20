@@ -2,67 +2,61 @@ import dbConnect from "@/app/lib/dbConnect";
 import School from "@/app/lib/models/School";
 import { NextResponse } from "next/server";
 
-export default async function handler(req: any, res: any) {
+export async function getSchools(req: any, res: any) {
   await dbConnect();
 
-  const {
-    query: { id },
-    method,
-  } = req;
+  try {
+    const schools = await School.find({});
+    return NextResponse.json(schools);
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message });
+  }
+}
 
-  switch (method) {
-    case "GET":
-      try {
-        const schools = await School.find({});
-        return NextResponse.json(schools);
-      } catch (err: any) {
-        return NextResponse.json({ error: err.message });
-      }
+export async function createSchool(req: any, res: any) {
+  await dbConnect();
 
-    case "POST":
-      try {
-        const { name, address } = JSON.parse(req.body);
-        const newSchool = new School({ name, address });
-        const savedSchool = await newSchool.save();
-        return NextResponse.json(savedSchool);
-      } catch (err: any) {
-        return NextResponse.json({ error: err.message });
-      }
+  try {
+    const { name, address } = JSON.parse(req.body);
+    const newSchool = new School({ name, address });
+    const savedSchool = await newSchool.save();
+    return NextResponse.json(savedSchool);
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message });
+  }
+}
 
-    case "PUT":
-      try {
-        const { name, address } = JSON.parse(req.body);
-        const updatedSchool = await School.findByIdAndUpdate(
-          id,
-          { name, address },
-          { new: true }
-        );
+export async function updateSchool(req: any, res: any) {
+  await dbConnect();
 
-        if (!updatedSchool) {
-          return NextResponse.json({ error: `School with ID ${id} not found` });
-        }
+  const { id } = req.query;
 
-        return NextResponse.json(updatedSchool);
-      } catch (err: any) {
-        return NextResponse.json({ error: err.message });
-      }
+  try {
+    const { name, address } = JSON.parse(req.body);
+    const updatedSchool = await School.findByIdAndUpdate(id, { name, address }, { new: true });
+    if (!updatedSchool) {
+      return NextResponse.json({ error: `School with ID ${id} not found` });
+    }
 
-    case "DELETE":
-      try {
-        const deletedSchool = await School.findByIdAndDelete(id);
+    return NextResponse.json(updatedSchool);
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message });
+  }
+}
 
-        if (!deletedSchool) {
-          return NextResponse.json({ error: `School with ID ${id} not found` });
-        }
+export async function deleteSchool(req: any, res: any) {
+  await dbConnect();
 
-        return NextResponse.json({
-          message: `School with ID ${id} deleted successfully`,
-        });
-      } catch (err: any) {
-        return NextResponse.json({ error: err.message });
-      }
+  const { id } = req.query;
 
-    default:
-      return NextResponse.json({ error: `Method ${method} Not Allowed` });
+  try {
+    const deletedSchool = await School.findByIdAndDelete(id);
+    if (!deletedSchool) {
+      return NextResponse.json({ error: `School with ID ${id} not found` });
+    }
+
+    return NextResponse.json({ message: `School with ID ${id} deleted successfully` });
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message });
   }
 }
