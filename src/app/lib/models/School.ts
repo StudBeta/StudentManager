@@ -9,7 +9,7 @@ export interface ISchool extends Document {
 }
 
 // Define the schema for the School model
-const schoolSchema: Schema = new Schema({
+const schoolSchema: Schema = new mongoose.Schema({
   school_id: {
     type: Number,
     required: true,
@@ -30,6 +30,6 @@ const schoolSchema: Schema = new Schema({
 });
 
 // Define and export the School model
-const School: Model<ISchool> = mongoose.models.School || mongoose.model<ISchool>("School", schoolSchema);
+const School = mongoose.model<ISchool>("School", schoolSchema);
 
 export default School;

@@ -1,30 +1,22 @@
-import { useEffect, useState } from "react";
+"use server";
 
 export default async function Page() {
     const fetchSchools = async () => {
-        const res = await fetch('api/products');
-        const products = await res.json();
-        return products;
+        const res = await fetch('http://localhost:3000/api/products');
+        // console.log(res.json());
+        console.log(res);
+        // const products = res;
+        // console.log(products);
+        return res;
     }
 
-    const [schools, setSchools] = useState([])
+    const products = await fetchSchools();
 
-    useEffect(() => {
-        fetchSchools().then((schools) => {
-            setSchools(schools);
-        });
+    // return () => {
+    //     <>
+    //         <h1>School List</h1>
 
-        return () => {
-            <>
-                <h1>School List</h1>
-                {schools.map((school: any) => {
-                    <div key={school.id}>
-                        <h2>{school.schoolName}</h2>
-                        <p>{school.desc}</p>
-                    </div>
-                })}
-            </>
-        }
-    }, [])
+    //     </>
+    // }
 
 }
