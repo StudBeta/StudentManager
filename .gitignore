@@ -1,3 +1,20 @@
 node_modules
 /node_modules
 .next
+
+.env
+
+# Next.js build output
+/.next/
+/out/
+
+# Production
+/build/
+/public/static/
+
+dev.db
+
+node_modules/
+.next/
+.swc/
+.*.env
