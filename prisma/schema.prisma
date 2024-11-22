@@ -1,0 +1,282 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// prisma/schema.prisma
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Student {
+  id                Int               @id @default(autoincrement())
+  name              String
+  age               Int
+  grade             Int
+  studentImage      String?
+  // courses           Course[]          @relation("StudentToCourse")
+  Teacher           Teacher?          @relation(fields: [teacherId], references: [id])
+  teacherId         Int?
+  address           String
+  ParentPhone       String
+  AlternatePhone    String
+  Email             String
+  Birthdate         DateTime
+  Gender            String
+  FatherName        String
+  MotherName        String
+  FatherPhone       String
+  MotherPhone       String
+  FatherEmail       String
+  MotherEmail       String
+  FatherAddress     String
+  MotherAddress     String
+  EmergencyName     String
+  EmergencyPhone    String
+  EmergencyEmail    String
+  EmergencyAddress  String
+  EmergencyRelation String
+  AdditionalInfo    String
+  updatedAt         DateTime          @updatedAt
+  createdAt         DateTime          @default(now())
+  deletedAt         DateTime?
+  Parent            Parent?           @relation(fields: [parentId], references: [id])
+  parentId          Int?
+  Course            Course?           @relation(fields: [courseId], references: [id])
+  courseId          Int?
+  Admission         Admission[]
+  Attendance        Attendance[]
+  Marks             Marks[]
+  ExamMarks         ExamMarks[]
+  LibraryCheckout   LibraryCheckout[]
+  LibraryFines      LibraryFines[]
+}
+
+model Parent {
+  id         Int          @id @default(autoincrement())
+  name       String
+  age        Int
+  address    String
+  phone      String
+  email      String
+  updatedAt  DateTime     @updatedAt
+  createdAt  DateTime     @default(now())
+  deletedAt  DateTime?
+  students   Student[]
+  Admission  Admission[]
+  Attendance Attendance[]
+}
+
+model Course {
+  id        Int       @id @default(autoincrement())
+  name      String
+  teacher   String
+  students  Student[]
+  Teacher   Teacher?  @relation(fields: [teacherId], references: [id])
+  teacherId Int?
+  updatedAt DateTime  @updatedAt
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+  Marks     Marks[]
+  Exam      Exam[]
+}
+
+model Teacher {
+  id        Int       @id @default(autoincrement())
+  name      String
+  age       Int
+  students  Student[]
+  // teachingCourses Course[]
+  courses   Course[]
+  updatedAt DateTime  @updatedAt
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+}
+
+model Users {
+  id        Int       @id @default(autoincrement())
+  username  String
+  password  String
+  role      String
+  updatedAt DateTime  @updatedAt
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+}
+
+model Classes {
+  id            Int             @id @default(autoincrement())
+  name          String
+  updatedAt     DateTime        @updatedAt
+  createdAt     DateTime        @default(now())
+  deletedAt     DateTime?
+  ClassSchedule ClassSchedule[]
+}
+
+model ClassSchedule {
+  id        Int       @id @default(autoincrement())
+  day       String
+  start     String
+  end       String
+  classId   Int
+  class     Classes   @relation(fields: [classId], references: [id])
+  updatedAt DateTime  @updatedAt
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+}
+
+model Admission {
+  id        Int       @id @default(autoincrement())
+  studentId Int
+  student   Student   @relation(fields: [studentId], references: [id])
+  updatedAt DateTime  @updatedAt
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+  Parent    Parent?   @relation(fields: [parentId], references: [id])
+  parentId  Int?
+}
+
+model Attendance {
+  id        Int       @id @default(autoincrement())
+  studentId Int
+  student   Student   @relation(fields: [studentId], references: [id])
+  date      DateTime
+  present   Boolean
+  updatedAt DateTime  @updatedAt
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+  Parent    Parent?   @relation(fields: [parentId], references: [id])
+  parentId  Int?
+}
+
+model Marks {
+  id        Int       @id @default(autoincrement())
+  studentId Int
+  student   Student   @relation(fields: [studentId], references: [id])
+  courseId  Int
+  course    Course    @relation(fields: [courseId], references: [id])
+  marks     Int
+  updatedAt DateTime  @updatedAt
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+}
+
+model Exam {
+  id        Int         @id @default(autoincrement())
+  courseId  Int
+  course    Course      @relation(fields: [courseId], references: [id])
+  examName  String
+  updatedAt DateTime    @updatedAt
+  createdAt DateTime    @default(now())
+  deletedAt DateTime?
+  ExamMarks ExamMarks[]
+}
+
+model ExamMarks {
+  id        Int       @id @default(autoincrement())
+  studentId Int
+  student   Student   @relation(fields: [studentId], references: [id])
+  examId    Int
+  exam      Exam      @relation(fields: [examId], references: [id])
+  marks     Int
+  updatedAt DateTime  @updatedAt
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+}
+
+model LibraryBook {
+  id              Int               @id @default(autoincrement())
+  title           String
+  author          String
+  genre           String
+  copies          Int
+  updatedAt       DateTime          @updatedAt
+  createdAt       DateTime          @default(now())
+  deletedAt       DateTime?
+  LibraryCheckout LibraryCheckout[]
+  LibraryFines    LibraryFines[]
+}
+
+model LibraryCheckout {
+  id           Int         @id @default(autoincrement())
+  studentId    Int
+  student      Student     @relation(fields: [studentId], references: [id])
+  bookId       Int
+  book         LibraryBook @relation(fields: [bookId], references: [id])
+  checkoutDate DateTime
+  returnDate   DateTime?
+  updatedAt    DateTime    @updatedAt
+  createdAt    DateTime    @default(now())
+  deletedAt    DateTime?
+}
+
+model LibraryFines {
+  id         Int         @id @default(autoincrement())
+  studentId  Int
+  student    Student     @relation(fields: [studentId], references: [id])
+  bookId     Int
+  book       LibraryBook @relation(fields: [bookId], references: [id])
+  fineAmount Int
+  updatedAt  DateTime    @updatedAt
+  createdAt  DateTime    @default(now())
+  deletedAt  DateTime?
+}
+
+model School {
+  id              Int               @id @default(autoincrement())
+  name            String
+  updatedAt       DateTime          @updatedAt
+  createdAt       DateTime          @default(now())
+  deletedAt       DateTime?
+  SchoolDetails   SchoolDetails[]
+  SchoolLocations SchoolLocations[]
+  SchoolContact   SchoolContact[]
+}
+
+model SchoolDetails {
+  id            Int             @id @default(autoincrement())
+  schoolId      Int
+  school        School          @relation(fields: [schoolId], references: [id])
+  updatedAt     DateTime        @updatedAt
+  createdAt     DateTime        @default(now())
+  deletedAt     DateTime?
+  SchoolContact SchoolContact[]
+}
+
+model SchoolContact {
+  id              Int            @id @default(autoincrement())
+  schoolId        Int
+  school          School         @relation(fields: [schoolId], references: [id])
+  updatedAt       DateTime       @updatedAt
+  createdAt       DateTime       @default(now())
+  deletedAt       DateTime?
+  Phone           String
+  Email           String
+  SchoolDetails   SchoolDetails? @relation(fields: [schoolDetailsId], references: [id])
+  schoolDetailsId Int?
+}
+
+model SchoolLocations {
+  id            Int             @id @default(autoincrement())
+  name          String
+  updatedAt     DateTime        @updatedAt
+  createdAt     DateTime        @default(now())
+  deletedAt     DateTime?
+  SchoolAddress SchoolAddress[]
+  School        School?         @relation(fields: [schoolId], references: [id])
+  schoolId      Int?
+}
+
+model SchoolAddress {
+  id              Int               @id @default(autoincrement())
+  street          String
+  city            String
+  state           String
+  zip             String
+  updatedAt       DateTime          @updatedAt
+  createdAt       DateTime          @default(now())
+  deletedAt       DateTime?
+  SchoolLocations SchoolLocations[]
+}

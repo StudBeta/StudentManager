@@ -1,5 +1,4 @@
 {
-  "/studentList/page": "app/studentList/page.js",
-  "/api/products/route": "app/api/products/route.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/student/page": "app/student/page.js",
+  "/studentList/page": "app/studentList/page.js"
 }

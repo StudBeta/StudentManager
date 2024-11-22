@@ -1,5 +1,36 @@
 {
-  "node": {},
+  "node": {
+    "84213b5899d5992a2b523ae535fb79f3c2cdcfc0": {
+      "workers": {
+        "app/samplePost/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fjameel%2FDownloads%2FStudentManager%2Fsrc%2Factions%2Factions.ts%22%2C%5B%22editStudent%22%2C%22createStudent%22%2C%22deleteStudent%22%5D%5D%5D&__client_imported__=!",
+        "app/student/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fjameel%2FDownloads%2FStudentManager%2Fsrc%2Factions%2Factions.ts%22%2C%5B%22editStudent%22%2C%22createStudent%22%2C%22deleteStudent%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/samplePost/page": "rsc",
+        "app/student/page": "rsc"
+      }
+    },
+    "c3a3898d1cab88972a2e9b93ac285b53e30974d8": {
+      "workers": {
+        "app/samplePost/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fjameel%2FDownloads%2FStudentManager%2Fsrc%2Factions%2Factions.ts%22%2C%5B%22editStudent%22%2C%22createStudent%22%2C%22deleteStudent%22%5D%5D%5D&__client_imported__=!",
+        "app/student/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fjameel%2FDownloads%2FStudentManager%2Fsrc%2Factions%2Factions.ts%22%2C%5B%22editStudent%22%2C%22createStudent%22%2C%22deleteStudent%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/samplePost/page": "rsc",
+        "app/student/page": "rsc"
+      }
+    },
+    "eee7d9c2c100ecf6d74719cfec0aff22fa15ed63": {
+      "workers": {
+        "app/samplePost/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fjameel%2FDownloads%2FStudentManager%2Fsrc%2Factions%2Factions.ts%22%2C%5B%22editStudent%22%2C%22createStudent%22%2C%22deleteStudent%22%5D%5D%5D&__client_imported__=!",
+        "app/student/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fjameel%2FDownloads%2FStudentManager%2Fsrc%2Factions%2Factions.ts%22%2C%5B%22editStudent%22%2C%22createStudent%22%2C%22deleteStudent%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/samplePost/page": "rsc",
+        "app/student/page": "rsc"
+      }
+    }
+  },
   "edge": {},
-  "encryptionKey": "fPP2qQ0OqrS3jxBgIotRRmHrCOosCC824vxy1Eu1VAw="
+  "encryptionKey": "pN59R5zCAdL5Qv2mkZFiq+SYappWEHD1Hzz9l+Uhtsw="
 }
