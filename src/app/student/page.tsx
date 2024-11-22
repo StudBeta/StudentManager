@@ -1,6 +1,7 @@
 import { createStudent, deleteStudent } from "@/actions/actions";
-import DefaultLayout from "@/components/Layouts/DefaultLayout"
-import prisma from "@/lib/db"
+import DefaultLayout from "@/components/Layouts/DefaultLayout";
+import prisma from "@/lib/db";
+import Image from "next/image";
 
 const Post = async () => {
     return (
@@ -8,8 +9,8 @@ const Post = async () => {
             <CommonTable />
             <AddStudent />
         </DefaultLayout>
-    )
-}
+    );
+};
 
 const CommonTable = async () => {
     const students = await prisma.student.findMany();
@@ -47,11 +48,15 @@ const CommonTable = async () => {
                     <div className="col-span-3 flex items-center">
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                             <div className="h-12.5 w-15 rounded-md">
-                                <img src='data:image/png;base64, {}' alt={student.name} />
-
+                                <Image
+                                    className="aspect-[4/3] w-full rounded-lg "
+                                    src={`data:image/png;base64,${student.studentImage}`}
+                                    width={500}
+                                    height={500}
+                                    alt="Picture of the author"
+                                />
                             </div>
                             <div>
-
                                 <h5 className="font-medium text-black dark:text-white">
                                     {student.name}
                                 </h5>
@@ -72,7 +77,9 @@ const CommonTable = async () => {
                         </p>
                     </div>
                     <div className="col-span-1 flex items-center">
-                        <p className="text-sm text-black dark:text-white">{student.EmergencyPhone}</p>
+                        <p className="text-sm text-black dark:text-white">
+                            {student.EmergencyPhone}
+                        </p>
                     </div>
                     <div className="col-span-1 flex items-center">
                         <div className="flex items-center space-x-3.5">
@@ -95,10 +102,7 @@ const CommonTable = async () => {
                                     />
                                 </svg>
                             </button>
-                            <button className="hover:text-primary"
-
-
-                            >
+                            <button className="hover:text-primary">
                                 <svg
                                     className="fill-current"
                                     width="18"
@@ -133,13 +137,17 @@ const CommonTable = async () => {
     );
 };
 
-
 const AddStudent = async () => {
     return (
         <div className="rounded-sm border border-stroke bg-white px-5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark">
-            <form action={createStudent} className="space-y-4 lg:grid lg:grid-cols-2 lg:gap-4">
+            <form
+                action={createStudent}
+                className="space-y-4 lg:grid lg:grid-cols-2 lg:gap-4"
+            >
                 <div>
-                    <label className="mb-2.5 block text-black dark:text-white">Name <span className="text-red-500">*</span></label>
+                    <label className="mb-2.5 block text-black dark:text-white">
+                        Name <span className="text-red-500">*</span>
+                    </label>
                     <input
                         type="text"
                         name="name"
@@ -150,7 +158,9 @@ const AddStudent = async () => {
                 </div>
 
                 <div>
-                    <label className="mb-2.5 block text-black dark:text-white">Age <span className="text-red-500">*</span></label>
+                    <label className="mb-2.5 block text-black dark:text-white">
+                        Age <span className="text-red-500">*</span>
+                    </label>
                     <input
                         type="number"
                         name="age"
@@ -161,7 +171,9 @@ const AddStudent = async () => {
                 </div>
 
                 <div>
-                    <label className="mb-2.5 block text-black dark:text-white">Grade <span className="text-red-500">*</span></label>
+                    <label className="mb-2.5 block text-black dark:text-white">
+                        Grade <span className="text-red-500">*</span>
+                    </label>
                     <input
                         type="number"
                         name="grade"
@@ -172,7 +184,9 @@ const AddStudent = async () => {
                 </div>
 
                 <div>
-                    <label className="mb-2.5 block text-black dark:text-white">Student Image <span className="text-red-500">*</span></label>
+                    <label className="mb-2.5 block text-black dark:text-white">
+                        Student Image <span className="text-red-500">*</span>
+                    </label>
                     <input
                         type="file"
                         name="studentImage"
@@ -184,7 +198,9 @@ const AddStudent = async () => {
                 </div>
 
                 <div>
-                    <label className="mb-2.5 block text-black dark:text-white">Address <span className="text-red-500">*</span></label>
+                    <label className="mb-2.5 block text-black dark:text-white">
+                        Address <span className="text-red-500">*</span>
+                    </label>
                     <input
                         type="text"
                         name="address"
@@ -195,7 +211,9 @@ const AddStudent = async () => {
                 </div>
 
                 <div>
-                    <label className="mb-2.5 block text-black dark:text-white">Parent Phone <span className="text-red-500">*</span></label>
+                    <label className="mb-2.5 block text-black dark:text-white">
+                        Parent Phone <span className="text-red-500">*</span>
+                    </label>
                     <input
                         type="tel"
                         name="parentPhone"
@@ -206,7 +224,9 @@ const AddStudent = async () => {
                 </div>
 
                 <div>
-                    <label className="mb-2.5 block text-black dark:text-white">Alternate Phone <span className="text-red-500">*</span></label>
+                    <label className="mb-2.5 block text-black dark:text-white">
+                        Alternate Phone <span className="text-red-500">*</span>
+                    </label>
                     <input
                         type="tel"
                         name="alternatePhone"
@@ -217,7 +237,9 @@ const AddStudent = async () => {
                 </div>
 
                 <div>
-                    <label className="mb-2.5 block text-black dark:text-white">Email <span className="text-red-500">*</span></label>
+                    <label className="mb-2.5 block text-black dark:text-white">
+                        Email <span className="text-red-500">*</span>
+                    </label>
                     <input
                         type="email"
                         name="email"
@@ -228,7 +250,9 @@ const AddStudent = async () => {
                 </div>
 
                 <div>
-                    <label className="mb-2.5 block text-black dark:text-white">Birthdate <span className="text-red-500">*</span></label>
+                    <label className="mb-2.5 block text-black dark:text-white">
+                        Birthdate <span className="text-red-500">*</span>
+                    </label>
                     <input
                         type="date"
                         name="birthdate"
@@ -238,7 +262,9 @@ const AddStudent = async () => {
                 </div>
 
                 <div>
-                    <label className="mb-2.5 block text-black dark:text-white">Gender <span className="text-red-500">*</span></label>
+                    <label className="mb-2.5 block text-black dark:text-white">
+                        Gender <span className="text-red-500">*</span>
+                    </label>
                     <select
                         name="gender"
                         required
@@ -251,7 +277,9 @@ const AddStudent = async () => {
                 </div>
 
                 <div>
-                    <label className="mb-2.5 block text-black dark:text-white">Father's Name <span className="text-red-500">*</span></label>
+                    <label className="mb-2.5 block text-black dark:text-white">
+                        Father's Name <span className="text-red-500">*</span>
+                    </label>
                     <input
                         type="text"
                         name="fatherName"
@@ -262,7 +290,9 @@ const AddStudent = async () => {
                 </div>
 
                 <div>
-                    <label className="mb-2.5 block text-black dark:text-white">Mother's Name <span className="text-red-500">*</span></label>
+                    <label className="mb-2.5 block text-black dark:text-white">
+                        Mother's Name <span className="text-red-500">*</span>
+                    </label>
                     <input
                         type="text"
                         name="motherName"
@@ -273,7 +303,9 @@ const AddStudent = async () => {
                 </div>
 
                 <div>
-                    <label className="mb-2.5 block text-black dark:text-white">Emergency Contact Name <span className="text-red-500">*</span></label>
+                    <label className="mb-2.5 block text-black dark:text-white">
+                        Emergency Contact Name <span className="text-red-500">*</span>
+                    </label>
                     <input
                         type="text"
                         name="emergencyName"
@@ -284,7 +316,9 @@ const AddStudent = async () => {
                 </div>
 
                 <div>
-                    <label className="mb-2.5 block text-black dark:text-white">Emergency Contact Phone <span className="text-red-500">*</span></label>
+                    <label className="mb-2.5 block text-black dark:text-white">
+                        Emergency Contact Phone <span className="text-red-500">*</span>
+                    </label>
                     <input
                         type="tel"
                         name="emergencyPhone"
@@ -295,7 +329,9 @@ const AddStudent = async () => {
                 </div>
 
                 <div className="lg:col-span-2">
-                    <label className="mb-2.5 block text-black dark:text-white">Additional Information</label>
+                    <label className="mb-2.5 block text-black dark:text-white">
+                        Additional Information
+                    </label>
                     <textarea
                         name="additionalInfo"
                         placeholder="Enter any additional information"
@@ -305,13 +341,13 @@ const AddStudent = async () => {
 
                 <button
                     type="submit"
-                    className="lg:col-span-2 flex w-full justify-center rounded bg-primary p-3 font-medium text-gray hover:bg-opacity-90"
+                    className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray hover:bg-opacity-90 lg:col-span-2"
                 >
                     Add Student
                 </button>
             </form>
         </div>
-    )
-}
+    );
+};
 
 export default Post;
