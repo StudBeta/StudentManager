@@ -1,3 +1,4 @@
+'use client'
 import { createStudent, deleteStudent } from "@/actions/actions";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import prisma from "@/lib/db";
@@ -102,7 +103,10 @@ const CommonTable = async () => {
                                     />
                                 </svg>
                             </button>
-                            <button className="hover:text-primary">
+                            <button className="hover:text-primary" onClick={function () {
+                                console.log(student.name);
+                                console.log(student.id);
+                            }}>
                                 <svg
                                     className="fill-current"
                                     width="18"
