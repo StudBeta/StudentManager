@@ -105,3 +105,50 @@ export async function editStudent(formData: FormData) {
     throw error;
   }
 }
+
+export async function createSchool(formData: FormData) {
+  try {
+    await prisma.school.create({
+      data: {
+        name: formData.get("name")?.toString() || "",
+      },
+    });
+    revalidatePath("/school");
+  } catch (error) {
+    console.error("Error creating school:", error);
+    throw error;
+  }
+}
+
+export async function editSchool(formData: FormData) {
+  try {
+    const schoolId = parseInt(formData.get("id")?.toString() || "0");
+
+    await prisma.school.update({
+      where: {
+        id: schoolId,
+      },
+      data: {
+        name: formData.get("name")?.toString() || "",
+      },
+    });
+    revalidatePath("/school");
+  } catch (error) {
+    console.error("Error editing school:", error);
+    throw error;
+  }
+}
+
+export async function deleteSchool(schoolId: number) {
+  try {
+    await prisma.school.delete({
+      where: {
+        id: schoolId,
+      },
+    });
+    revalidatePath("/school");
+  } catch (error) {
+    console.error("Error deleting school:", error);
+    throw error;
+  }
+}
