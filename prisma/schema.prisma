@@ -17,7 +17,6 @@ model Student {
   age               Int
   grade             Int
   studentImage      String?
-  // courses           Course[]          @relation("StudentToCourse")
   Teacher           Teacher?          @relation(fields: [teacherId], references: [id])
   teacherId         Int?
   address           String
@@ -225,60 +224,18 @@ model LibraryFines {
 }
 
 model School {
-  id              Int               @id @default(autoincrement())
-  name            String
-  updatedAt       DateTime          @updatedAt
-  createdAt       DateTime          @default(now())
-  deletedAt       DateTime?
-  SchoolDetails   SchoolDetails[]
-  SchoolLocations SchoolLocations[]
-  SchoolContact   SchoolContact[]
-}
-
-model SchoolDetails {
-  id            Int             @id @default(autoincrement())
-  schoolId      Int
-  school        School          @relation(fields: [schoolId], references: [id])
-  updatedAt     DateTime        @updatedAt
-  createdAt     DateTime        @default(now())
-  deletedAt     DateTime?
-  SchoolContact SchoolContact[]
-}
-
-model SchoolContact {
-  id              Int            @id @default(autoincrement())
-  schoolId        Int
-  school          School         @relation(fields: [schoolId], references: [id])
-  updatedAt       DateTime       @updatedAt
-  createdAt       DateTime       @default(now())
-  deletedAt       DateTime?
-  Phone           String
-  Email           String
-  SchoolDetails   SchoolDetails? @relation(fields: [schoolDetailsId], references: [id])
-  schoolDetailsId Int?
-}
-
-model SchoolLocations {
-  id            Int             @id @default(autoincrement())
-  name          String
-  updatedAt     DateTime        @updatedAt
-  createdAt     DateTime        @default(now())
-  deletedAt     DateTime?
-  SchoolAddress SchoolAddress[]
-  School        School?         @relation(fields: [schoolId], references: [id])
-  schoolId      Int?
-}
-
-model SchoolAddress {
-  id              Int               @id @default(autoincrement())
-  street          String
-  city            String
-  state           String
-  zip             String
-  updatedAt       DateTime          @updatedAt
-  createdAt       DateTime          @default(now())
-  deletedAt       DateTime?
-  SchoolLocations SchoolLocations[]
+  id        Int       @id @default(autoincrement())
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime? // Soft delete field
+  phone     String?
+  email     String?
+  street    String?
+  city      String?
+  state     String?
+  zip       String?
+  active    String?
 }
 
 model Brand {
