@@ -34,7 +34,7 @@ const AddProduct = ({ brands }: { brands: Brand[] }) => {
     };
 
     return (
-        <div>
+        <>
             <button className="rounded-md bg-primary px-9 py-3 font-medium text-white" onClick={handleModal}>
                 Add New
             </button>
@@ -102,7 +102,7 @@ const AddProduct = ({ brands }: { brands: Brand[] }) => {
                     </form>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 
