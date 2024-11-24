@@ -1,14 +1,17 @@
-import dbConnect from "@/app/lib/dbConnect";
-import Product from "@/app/lib/models/Product";
 import { NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
+import type { Product } from "@prisma/client";
+import prisma from "@/lib/db";
 
-export async function GET() {
-  await dbConnect();
-
-  try {
-    const products = await Product.find({});
-    return NextResponse.json(products);
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message });
-  }
-}
+// const prisma = new PrismaClient();
+export const POST = async (request: Request) => {
+  const body: Product = await request.json();
+  const product = await prisma.product.create({
+    data: {
+      title: body.title,
+      price: body.price,
+      brandId: body.brandId,
+    },
+  });
+  return NextResponse.json(product, { status: 201 });
+};
