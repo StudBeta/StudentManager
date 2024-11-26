@@ -44,59 +44,61 @@ const AddProduct = ({ brands }: { brands: Brand[] }) => {
                     <h3 className="pb-2 text-xl font-bold text-black dark:text-white sm:text-2xl">Add New Product</h3>
                     <span className="mx-auto mb-6 inline-block h-1 w-22.5 rounded bg-primary"></span>
                     <form onSubmit={handleSubmit}>
-                        <div className="form-control w-full">
-                            <label className="label font-bold">Product Name</label>
-                            <input
-                                type="text"
-                                value={title}
-                                onChange={(e) => setTitle(e.target.value)}
-                                className="input input-bordered"
-                                placeholder="Product Name"
-                            />
-                        </div>
-                        <div className="form-control w-full">
-                            <label className="label font-bold">Price</label>
-                            <input
-                                type="text"
-                                value={price}
-                                onChange={(e) => setPrice(e.target.value)}
-                                className="input input-bordered"
-                                placeholder="Price"
-                            />
-                        </div>
-                        <div className="form-control w-full">
-                            <label className="label font-bold">Brand</label>
-                            <select
-                                value={brand}
-                                onChange={(e) => setBrand(e.target.value)}
-                                className="select select-bordered"
-                            >
-                                <option value="" disabled>
-                                    Select a Brand
-                                </option>
-                                {brands.map((brand) => (
-                                    <option value={brand.id} key={brand.id}>
-                                        {brand.name}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="-mx-3 flex flex-wrap gap-y-4">
-                            <div className="w-full px-3 2xsm:w-1/2">
-                                <button type="button" className="block w-full rounded border border-stroke bg-gray p-3 text-center font-medium text-black transition hover:border-meta-1 hover:bg-meta-1 hover:text-white dark:border-strokedark dark:bg-meta-4 dark:text-white dark:hover:border-meta-1 dark:hover:bg-meta-1" onClick={handleModal}>
-                                    Close
-                                </button>
+                        <div className="flex flex-col gap-5.5 p-6.5">
+                            <div className="form-control w-full">
+                                <label className="mb-3 block text-sm font-medium text-black dark:text-white text-left">Product Name</label>
+                                <input
+                                    type="text"
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                                    placeholder="Product Name"
+                                />
                             </div>
-                            <div className="w-full px-3 2xsm:w-1/2">
-                                {!isLoading ? (
-                                    <button type="submit" className="block w-full rounded border border-primary bg-primary p-3 text-center font-medium text-white transition hover:bg-opacity-90">
-                                        Save
+                            <div className="form-control w-full">
+                                <label className="mb-3 block text-sm font-medium text-black dark:text-white text-left">Price</label>
+                                <input
+                                    type="text"
+                                    value={price}
+                                    onChange={(e) => setPrice(e.target.value)}
+                                    className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                                    placeholder="Price"
+                                />
+                            </div>
+                            <div className="form-control w-full">
+                                <label className="mb-3 block text-sm font-medium text-black dark:text-white text-left">Brand</label>
+                                <select
+                                    value={brand}
+                                    onChange={(e) => setBrand(e.target.value)}
+                                    className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                                >
+                                    <option value="" disabled>
+                                        Select a Brand
+                                    </option>
+                                    {brands.map((brand) => (
+                                        <option value={brand.id} key={brand.id}>
+                                            {brand.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="-mx-3 flex flex-wrap gap-y-4">
+                                <div className="w-full px-3 2xsm:w-1/2">
+                                    <button type="button" className="block w-full rounded border border-stroke bg-gray p-3 text-center font-medium text-black transition hover:border-meta-1 hover:bg-meta-1 hover:text-white dark:border-strokedark dark:bg-meta-4 dark:text-white dark:hover:border-meta-1 dark:hover:bg-meta-1" onClick={handleModal}>
+                                        Close
                                     </button>
-                                ) : (
-                                    <button type="button" className="block w-full rounded border border-primary bg-primary p-3 text-center font-medium text-white transition hover:bg-opacity-90">
-                                        Saving...
-                                    </button>
-                                )}
+                                </div>
+                                <div className="w-full px-3 2xsm:w-1/2">
+                                    {!isLoading ? (
+                                        <button type="submit" className="block w-full rounded border border-primary bg-primary p-3 text-center font-medium text-white transition hover:bg-opacity-90">
+                                            Save
+                                        </button>
+                                    ) : (
+                                        <button type="button" className="block w-full rounded border border-primary bg-primary p-3 text-center font-medium text-white transition hover:bg-opacity-90">
+                                            Saving...
+                                        </button>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </form>
