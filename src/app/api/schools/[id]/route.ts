@@ -9,7 +9,7 @@ export const PATCH = async (
   { params }: { params: { id: string } },
 ) => {
   const body: School = await request.json();
-  const school = await prisma.product.update({
+  const school = await prisma.school.update({
     where: {
       id: Number(params.id),
     },
@@ -36,5 +36,5 @@ export const DELETE = async (
       id: Number(params.id),
     },
   });
-  return NextResponse.json(product, { status: 200 });
+  return NextResponse.json(school, { status: 200 });
 };

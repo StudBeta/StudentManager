@@ -52,6 +52,8 @@ model Student {
   ExamMarks         ExamMarks[]
   LibraryCheckout   LibraryCheckout[]
   LibraryFines      LibraryFines[]
+  school            School            @relation(fields: [schoolId], references: [id])
+  schoolId          Int
 }
 
 model Parent {
@@ -226,9 +228,6 @@ model LibraryFines {
 model School {
   id        Int       @id @default(autoincrement())
   name      String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime? // Soft delete field
   phone     String?
   email     String?
   street    String?
@@ -236,6 +235,10 @@ model School {
   state     String?
   zip       String?
   active    String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime? // Soft delete field
+  Student   Student[]
 }
 
 model Brand {

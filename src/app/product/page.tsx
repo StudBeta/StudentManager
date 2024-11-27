@@ -11,7 +11,7 @@ const pageSize = 5;
 
 const getProducts = async () => {
     const res = await prisma.product.findMany({
-        skip: pageSize,
+        // skip: pageSize,
         select: {
             id: true,
             title: true,
@@ -54,45 +54,43 @@ const Product = async () => {
                         </div>
 
                         <div className="bg-white dark:bg-boxdark rounded-b-[10px]">
-                            <div className="grid grid-cols-12 border-t border-[#EEEEEE] px-5 py-4 dark:border-strokedark lg:px-7.5 2xl:px-11">
-                                {products.map((product: any, index: any) => (
-                                    <>
-                                        <div key={product.id} className="col-span-4">
-                                            <p className="text-[#637381] dark:text-bodydark">{product.title}</p>
-                                        </div>
-                                        <div className="col-span-4">
-                                            <p className="text-[#637381] dark:text-bodydark">
-                                                {product.price}
-                                            </p>
-                                        </div>
+                            {products.map((product: any, index: any) => (
+                                <div key={product.id} className="grid grid-cols-12 border-t border-[#EEEEEE] px-5 py-4 dark:border-strokedark lg:px-7.5 2xl:px-11">
+                                    <div className="col-span-4">
+                                        <p className="text-[#637381] dark:text-bodydark">{product.title}</p>
+                                    </div>
+                                    <div className="col-span-4">
+                                        <p className="text-[#637381] dark:text-bodydark">
+                                            {product.price}
+                                        </p>
+                                    </div>
 
-                                        <div className="col-span-2 ">
-                                            <p className="text-[#637381] dark:text-bodydark">{product.brand.name}</p>
-                                        </div>
+                                    <div className="col-span-2 ">
+                                        <p className="text-[#637381] dark:text-bodydark">{product.brand.name}</p>
+                                    </div>
 
-                                        <div className="col-span-2 flex align-left justify-end">
-                                            <UpdateProduct brands={brands} product={product} />
-                                            <DeleteProduct product={product} />
-                                        </div>
-                                    </>
-                                ))}
-                                <div className="col-span-10">
-                                    {products.length === 0 && (
-                                        <div className="text-center text-lg font-medium text-gray-600 dark:text-gray-400">No products found.</div>
-                                    )}
+                                    <div className="col-span-2 flex align-left justify-end">
+                                        <UpdateProduct brands={brands} product={product} />
+                                        <DeleteProduct product={product} />
+                                    </div>
                                 </div>
+                            ))}
+                            <div className="col-span-10">
+                                {products.length === 0 && (
+                                    <div className="text-center text-lg font-medium text-gray-600 dark:text-gray-400">No products found.</div>
+                                )}
                             </div>
                         </div>
-                        <div className="datatable-top">
-                            <div className="datatable-dropdown">
-                                <label>
-                                    <select className="datatable-selector"><option value="5">5</option><option value="10">10</option><option value="15">15</option><option value="-1">All</option></select> entries per page
-                                </label>
-                            </div>
-                            {/* <div className="datatable-search">
+                    </div>
+                    <div className="datatable-top">
+                        <div className="datatable-dropdown">
+                            <label>
+                                <select className="datatable-selector"><option value="5">5</option><option value="10">10</option><option value="15">15</option><option value="-1">All</option></select> entries per page
+                            </label>
+                        </div>
+                        {/* <div className="datatable-search">
                             <input className="datatable-input" placeholder="Search..." type="search" title="Search within table" aria-controls="dataTableTwo" />
                         </div> */}
-                        </div>
                     </div>
                 </div>
             </div>

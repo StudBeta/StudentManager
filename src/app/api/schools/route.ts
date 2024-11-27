@@ -4,9 +4,9 @@ import type { School } from "@prisma/client";
 import prisma from "@/lib/db";
 
 // const prisma = new PrismaClient();
-export const SCHOOL = async (request: Request) => {
+export const POST = async (request: Request) => {
   const body: School = await request.json();
-  const school = await prisma.product.create({
+  const school = await prisma.school.create({
     data: {
       name: body.name,
       phone: body.phone,
@@ -15,7 +15,7 @@ export const SCHOOL = async (request: Request) => {
       city: body.city,
       state: body.state,
       zip: body.zip,
-      active: body.active,
+      // active: body.active,
     },
   });
   return NextResponse.json(school, { status: 201 });
